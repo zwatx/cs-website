@@ -29,7 +29,7 @@
     in
     {
       overlays.default = final: prev: rec {
-        nodejs = prev.nodejs;
+        nodejs = prev.nodejs_latest;
         yarn = prev.yarn.override { inherit nodejs; };
       };
 
