@@ -28,6 +28,8 @@ export async function inlineStyles (html, file) {
   return html.replace(/<link\b[^>]*>/g, (tag) => {
     const href = tag.match(/\bhref="([^"]+)"/)?.[1];
     return /\brel="preload"/.test(tag) && href &&
-      embeddedFonts.has(new URL(href, `https://build.invalid/${file}`).href) ? '' : tag;
+      embeddedFonts.has(new URL(href, `https://build.invalid/${file}`).href)
+      ? ''
+      : tag;
   });
 }
