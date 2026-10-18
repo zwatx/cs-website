@@ -37,7 +37,7 @@ export const events = [
   {
     type: 'Guest Speaker',
     track: 'guest-speaker',
-    date: '2026-10-05',
+    date: '2026-10-19',
     title: 'Quantum computing with HitoMatch',
     speaker: 'Anna White',
     description:
@@ -93,9 +93,19 @@ export const events = [
     type: 'Competitive Programming',
     track: 'competitive-programming',
     date: '2026-12-05',
-    title: 'Stacey & UIL contest',
+    title: 'Cy-Woods Computer Science Contests',
     description:
       'A contest by Stacey and the UIL contest writers. Limited availability.'
+  },
+  {
+    type: 'Competitive Programming',
+    track: 'competitive-programming',
+    date: '2027-01-16',
+    title: 'LASA-Indeed.com UIL Computer Science Contest',
+    description:
+      'A contest hosted by LASA and Indeed.com.',
+    location: 'Indeed.com @ the Domain',
+    signupNote: 'Email the officers for signup.'
   }
 ];
 
