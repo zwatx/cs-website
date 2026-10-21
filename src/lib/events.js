@@ -125,10 +125,6 @@ const dayFormatter = new Intl.DateTimeFormat('en-US', {
   day: '2-digit',
   timeZone: utcTimeZone
 });
-const monthFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'long',
-  timeZone: utcTimeZone
-});
 const shortMonthFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   timeZone: utcTimeZone
@@ -165,39 +161,45 @@ export function getClubDateKey (date) {
 export function formatEventDate (event) {
   if (event.date === null) {
     return {
-      dayLabel: null,
       endDateLabel: null,
-      monthLabel: null,
-      startDateLabel: 'TBD'
+      startDateLabel: 'TBD',
+      weekdayLabel: null
     };
   }
 
   const startDate = parseDateKey(event.date);
   const startMonth = shortMonthFormatter.format(startDate);
-  const startYear = yearFormatter.format(startDate);
   const display = {
-    dayLabel: `${weekdayFormatter.format(startDate)}, ${startYear}`,
     endDateLabel: null,
-    monthLabel: monthFormatter.format(startDate),
-    startDateLabel: `${startMonth} ${dayFormatter.format(startDate)}`
+    startDateLabel: `${startMonth} ${dayFormatter.format(startDate)}`,
+    weekdayLabel: weekdayFormatter.format(startDate)
   };
 
   if (!event.endDate) return display;
 
   const endDate = parseDateKey(event.endDate);
   const endMonth = shortMonthFormatter.format(endDate);
-  const endYear = yearFormatter.format(endDate);
-  const isSameMonth = startMonth === endMonth && startYear === endYear;
-  const yearLabel =
-    startYear === endYear ? startYear : `${startYear}–${endYear}`;
+  const isSameMonth =
+    startMonth === endMonth &&
+    yearFormatter.format(startDate) === yearFormatter.format(endDate);
 
   return {
     ...display,
-    dayLabel: `${weekdayFormatter.format(startDate)}–${weekdayFormatter.format(endDate)}, ${yearLabel}`,
     endDateLabel: isSameMonth
       ? dayFormatter.format(endDate)
-      : `${endMonth} ${dayFormatter.format(endDate)}`
+      : `${endMonth} ${dayFormatter.format(endDate)}`,
+    weekdayLabel: `${weekdayFormatter.format(startDate)}–${weekdayFormatter.format(endDate)}`
   };
+}
+
+/** Anchor id for an event's title, linked from the header's Events menu. */
+export function getTitleId (event) {
+  const slug = event.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  return `event-${event.date ?? 'tbd'}-${slug}`;
 }
 
 /** Describes when a scheduled event happens relative to the club's current day. */

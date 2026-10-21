@@ -55,10 +55,9 @@ test('derives the display labels for a multi-day event from its canonical dates'
   const codeBash = events.find(({ title }) => title === 'Code Bash');
 
   assert.deepEqual(formatEventDate(codeBash), {
-    dayLabel: 'Monday–Sunday, 2026',
     endDateLabel: '11',
-    monthLabel: 'October',
-    startDateLabel: 'Oct 05'
+    startDateLabel: 'Oct 05',
+    weekdayLabel: 'Monday–Sunday'
   });
 });
 
@@ -94,10 +93,9 @@ test('keeps the limited-availability December contest through club midnight', ()
   assert.match(contests[0].description, /Stacey and the UIL contest writers/);
   assert.match(contests[0].description, /Limited availability/);
   assert.deepEqual(formatEventDate(contests[0]), {
-    dayLabel: 'Saturday, 2026',
     endDateLabel: null,
-    monthLabel: 'December',
-    startDateLabel: 'Dec 05'
+    startDateLabel: 'Dec 05',
+    weekdayLabel: 'Saturday'
   });
   assert.deepEqual(getUpcomingContests(new Date('2026-12-06T06:00:00Z')), []);
 });

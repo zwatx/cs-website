@@ -1,17 +1,8 @@
 import '../ledger.css';
-import { eventTracks, formatEventDate } from '../lib/events.js';
+import { eventTracks, formatEventDate, getTitleId } from '../lib/events.js';
 
 export function getTrackLabel (track) {
   return eventTracks.find((entry) => entry.track === track)?.label ?? null;
-}
-
-export function getTitleId (event) {
-  const slug = event.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-
-  return `event-${event.date ?? 'tbd'}-${slug}`;
 }
 
 export function EventAction ({ event, className }) {

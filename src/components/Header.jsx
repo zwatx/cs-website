@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { formatEventDate, getScheduledEvents } from '../lib/events.js';
+import { formatEventDate, getScheduledEvents, getTitleId } from '../lib/events.js';
 import { getPracticeTypeHref } from '../lib/navigation.js';
 import { useEventDate } from '../lib/event-clock.jsx';
 
@@ -49,8 +49,8 @@ function EventsPanel () {
               const date = formatEventDate(event);
               return (
                 <li key={`${event.date}-${event.title}`}>
-                  {/* Matches the month section ids rendered by EventsPage. */}
-                  <PanelLink href={`/events/#${date.monthLabel.toLowerCase()}-events`}>
+                  {/* Matches the event title ids rendered by EventsPage. */}
+                  <PanelLink href={`/events/#${getTitleId(event)}`}>
                     <time className='site-nav-event-date' dateTime={event.date}>
                       {date.startDateLabel}{date.endDateLabel ? `–${date.endDateLabel}` : ''}
                     </time>
