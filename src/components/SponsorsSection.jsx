@@ -19,6 +19,7 @@ const sponsors = [
     role: 'Westlake alum (’22), Turing Scholar at UT Austin',
     photo: neoPhoto,
     photoSize: 480,
+    href: 'https://nwatx.me/',
     bio: 'Neo led Westlake’s UIL Computer Science team and, as a director at the Competitive Programming Initiative, helped build the USACO Guide. He now studies computer science and math at UT Austin, writes problems for the UT Programming Contest, and has interned at Roblox and DRW.'
   },
   {
