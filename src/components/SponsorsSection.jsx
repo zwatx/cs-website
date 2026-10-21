@@ -1,5 +1,6 @@
 import rosierPhoto from '../../assets/sponsors/lynden-rosier.webp';
 import neoPhoto from '../../assets/sponsors/neo-wang.webp';
+import kylePhoto from '../../assets/sponsors/kyle-simpson.webp';
 
 // People show a photo (or their initials) with a short bio; companies show a logo.
 // { kind: 'company', name: 'Acme', logo: acmeLogo, href: 'https://acme.com' }
@@ -19,6 +20,14 @@ const sponsors = [
     photo: neoPhoto,
     photoSize: 480,
     bio: 'Neo led Westlake’s UIL Computer Science team and, as a director at the Competitive Programming Initiative, helped build the USACO Guide. He now studies computer science and math at UT Austin, writes problems for the UT Programming Contest, and has interned at Roblox and DRW.'
+  },
+  {
+    kind: 'person',
+    name: 'Kyle Simpson',
+    role: 'Software engineer, author of “You Don’t Know JS”',
+    photo: kylePhoto,
+    photoSize: 440,
+    bio: 'Kyle Simpson is a web-oriented software engineer, widely acclaimed for his “You Don’t Know JS” book series and nearly 1M hours viewed of his online courses. Kyle’s superpower is asking better questions, and he deeply believes in maximally using the minimally-necessary tools for any task. As a “human-centric technologist”, he’s passionate about bringing humans and technology together, evolving engineering organizations towards solving the right problems, in simpler ways. Kyle will always fight for the people behind the pixels.'
   }
 ];
 
