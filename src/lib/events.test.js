@@ -48,7 +48,16 @@ test('keeps a multi-day competition upcoming through its final day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Code Bash', 'Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest', 'Caring about code in the age of AI']);
+  assert.deepEqual(eventTitles, [
+    'Code Bash',
+    'Seven Lakes',
+    'Quantum computing with HitoMatch',
+    'Clements',
+    'An Afternoon with Neo Wang',
+    'Cy-Woods Computer Science Contests',
+    'Caring about code in the age of AI',
+    'LASA-Indeed.com UIL Computer Science Contest'
+  ]);
 });
 
 test('derives the display labels for a multi-day event from its canonical dates', () => {
@@ -66,7 +75,15 @@ test('drops a multi-day competition on the next club calendar day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest', 'Caring about code in the age of AI']);
+  assert.deepEqual(eventTitles, [
+    'Seven Lakes',
+    'Quantum computing with HitoMatch',
+    'Clements',
+    'An Afternoon with Neo Wang',
+    'Cy-Woods Computer Science Contests',
+    'Caring about code in the age of AI',
+    'LASA-Indeed.com UIL Computer Science Contest'
+  ]);
 });
 
 test('keeps unscheduled events separate from the dated schedule', () => {
@@ -83,11 +100,11 @@ test('leaves contests out of the homepage preview after Clements', () => {
   assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang', 'Caring about code in the age of AI']);
 });
 
-test('keeps the limited-availability December contest through club midnight', () => {
+test('keeps the December contest through club midnight', () => {
   const now = new Date('2026-12-06T05:59:59Z');
   const contests = getUpcomingContests(now);
 
-  assert.deepEqual(contests.map(({ title }) => title), ['Stacey & UIL contest']);
+  assert.deepEqual(contests.map(({ title }) => title), ['Cy-Woods Computer Science Contests', 'LASA-Indeed.com UIL Computer Science Contest']);
   assert.deepEqual(getEventPreview(now).map(({ title }) => title), ['Caring about code in the age of AI']);
   assert.equal(contests[0].date, '2026-12-05');
   assert.match(contests[0].description, /Stacey and the UIL contest writers/);
@@ -97,7 +114,10 @@ test('keeps the limited-availability December contest through club midnight', ()
     startDateLabel: 'Dec 05',
     weekdayLabel: 'Saturday'
   });
-  assert.deepEqual(getUpcomingContests(new Date('2026-12-06T06:00:00Z')), []);
+  assert.deepEqual(
+    getUpcomingContests(new Date('2026-12-06T06:00:00Z')).map(({ title }) => title),
+    ['LASA-Indeed.com UIL Computer Science Contest']
+  );
 });
 
 test('returns no homepage events after every scheduled event has passed', () => {
@@ -110,7 +130,7 @@ test('returns no homepage events after every scheduled event has passed', () => 
 test('keeps the latest schedule addition, reschedule and cancellation', () => {
   assert.equal(
     events.find((e) => e.title === 'Quantum computing with HitoMatch').date,
-    '2026-10-05'
+    '2026-10-19'
   );
   assert.equal(
     events.find((e) => e.title === 'Build a website from scratch').date,
@@ -124,11 +144,11 @@ test('keeps the latest schedule addition, reschedule and cancellation', () => {
 test('lists past guest speakers newest first and keeps today\'s talk upcoming', () => {
   const titles = (now) => getPastSpeakers(new Date(now)).map(({ title }) => title);
 
-  assert.deepEqual(titles('2026-10-05T17:00:00Z'), [
+  assert.deepEqual(titles('2026-10-19T17:00:00Z'), [
     'Computer architecture and CS at UT',
     'Transformer architecture with Joseph Zhang'
   ]);
-  assert.deepEqual(titles('2026-10-06T05:00:00Z'), [
+  assert.deepEqual(titles('2026-10-20T05:00:00Z'), [
     'Quantum computing with HitoMatch',
     'Computer architecture and CS at UT',
     'Transformer architecture with Joseph Zhang'
@@ -140,13 +160,12 @@ test('archives every finished event newest first and keeps multi-day events unti
   const titles = (now) => getPastEvents(new Date(now)).map(({ title }) => title);
 
   assert.deepEqual(titles('2026-10-11T12:00:00Z'), [
-    'Quantum computing with HitoMatch',
     'Computer architecture and CS at UT',
     'Transformer architecture with Joseph Zhang'
   ]);
   assert.deepEqual(titles('2026-10-12T05:00:00Z').slice(0, 2), [
     'Code Bash',
-    'Quantum computing with HitoMatch'
+    'Computer architecture and CS at UT'
   ]);
   assert.deepEqual(titles('2026-08-30T12:00:00Z'), []);
   assert.ok(!titles('2027-01-01T12:00:00Z').includes('Build a website from scratch'));
