@@ -743,6 +743,10 @@
   text-wrap: pretty;
 }
 
+.sponsor-website {
+  margin-block-start: 6px;
+}
+
 .officer-grid {
   margin-block-start: clamp(48px, 7vw, 88px);
   display: grid;

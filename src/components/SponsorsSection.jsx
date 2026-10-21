@@ -2,7 +2,7 @@ import rosierPhoto from '../../assets/sponsors/lynden-rosier.webp';
 import neoPhoto from '../../assets/sponsors/neo-wang.webp';
 import kylePhoto from '../../assets/sponsors/kyle-simpson.webp';
 
-// People show a photo (or their initials) with a short bio; companies show a logo.
+// People show a photo (or their initials) with a short bio and an optional website; companies show a logo.
 // { kind: 'company', name: 'Acme', logo: acmeLogo, href: 'https://acme.com' }
 const sponsors = [
   {
@@ -27,6 +27,7 @@ const sponsors = [
     role: 'Software engineer, author of “You Don’t Know JS”',
     photo: kylePhoto,
     photoSize: 440,
+    href: 'https://me.getify.com/',
     bio: 'Kyle Simpson is a web-oriented software engineer, widely acclaimed for his “You Don’t Know JS” book series and nearly 1M hours viewed of his online courses. Kyle’s superpower is asking better questions, and he deeply believes in maximally using the minimally-necessary tools for any task. As a “human-centric technologist”, he’s passionate about bringing humans and technology together, evolving engineering organizations towards solving the right problems, in simpler ways. Kyle will always fight for the people behind the pixels.'
   }
 ];
@@ -55,6 +56,14 @@ function PersonSponsor ({ sponsor }) {
         <h3 className='sponsor-name'>{sponsor.name}</h3>
         <p className='sponsor-role'>{sponsor.role}</p>
         <p className='sponsor-bio'>{sponsor.bio}</p>
+        {sponsor.href
+          ? (
+            <a className='text-action sponsor-website' href={sponsor.href} target='_blank' rel='noreferrer'>
+              {new URL(sponsor.href).hostname}
+              <span className='action-arrow' aria-hidden='true'>↗</span>
+            </a>
+            )
+          : null}
       </div>
     </li>
   );
