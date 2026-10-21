@@ -98,6 +98,16 @@ export const events = [
       'A contest by Stacey and the UIL contest writers. Limited availability.'
   },
   {
+    type: 'Guest Speaker',
+    track: 'guest-speaker',
+    date: '2027-01-11',
+    title: 'Caring about code in the age of AI',
+    speaker: 'Kyle Simpson',
+    credential: 'Author of the “You Don’t Know JS” book series',
+    description:
+      'Kyle Simpson shares his thoughts, and shows some code, from SI: Super(ficial) Intelligence, a recent art and satire project he built.'
+  },
+  {
     type: 'Competitive Programming',
     track: 'competitive-programming',
     date: '2027-01-16',

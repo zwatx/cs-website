@@ -48,7 +48,7 @@ test('keeps a multi-day competition upcoming through its final day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Code Bash', 'Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest']);
+  assert.deepEqual(eventTitles, ['Code Bash', 'Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest', 'Caring about code in the age of AI']);
 });
 
 test('derives the display labels for a multi-day event from its canonical dates', () => {
@@ -67,7 +67,7 @@ test('drops a multi-day competition on the next club calendar day', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest']);
+  assert.deepEqual(eventTitles, ['Seven Lakes', 'Clements', 'An Afternoon with Neo Wang', 'Stacey & UIL contest', 'Caring about code in the age of AI']);
 });
 
 test('keeps unscheduled events separate from the dated schedule', () => {
@@ -81,7 +81,7 @@ test('leaves contests out of the homepage preview after Clements', () => {
     ({ title }) => title
   );
 
-  assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang']);
+  assert.deepEqual(eventTitles, ['An Afternoon with Neo Wang', 'Caring about code in the age of AI']);
 });
 
 test('keeps the limited-availability December contest through club midnight', () => {
@@ -89,7 +89,7 @@ test('keeps the limited-availability December contest through club midnight', ()
   const contests = getUpcomingContests(now);
 
   assert.deepEqual(contests.map(({ title }) => title), ['Stacey & UIL contest']);
-  assert.deepEqual(getEventPreview(now), []);
+  assert.deepEqual(getEventPreview(now).map(({ title }) => title), ['Caring about code in the age of AI']);
   assert.equal(contests[0].date, '2026-12-05');
   assert.match(contests[0].description, /Stacey and the UIL contest writers/);
   assert.match(contests[0].description, /Limited availability/);
@@ -103,11 +103,10 @@ test('keeps the limited-availability December contest through club midnight', ()
 });
 
 test('returns no homepage events after every scheduled event has passed', () => {
-  const eventTitles = getEventPreview(new Date('2026-12-06T06:00:00Z')).map(
-    ({ title }) => title
-  );
+  const titles = (now) => getEventPreview(new Date(now)).map(({ title }) => title);
 
-  assert.deepEqual(eventTitles, []);
+  assert.deepEqual(titles('2027-01-12T05:59:59Z'), ['Caring about code in the age of AI']);
+  assert.deepEqual(titles('2027-01-12T06:00:00Z'), []);
 });
 
 test('keeps the latest schedule addition, reschedule and cancellation', () => {
