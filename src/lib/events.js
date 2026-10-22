@@ -115,7 +115,8 @@ export const events = [
     description:
       'A contest hosted by LASA and Indeed.com.',
     location: 'Indeed.com @ the Domain',
-    signupNote: 'Email the officers for signup.'
+    signupNote: 'Use this link to signup!',
+    link: 'https://forms.gle/8ojw9R6CMZNZM8z9A'
   }
 ];
 
