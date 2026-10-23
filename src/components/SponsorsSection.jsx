@@ -1,8 +1,9 @@
 import rosierPhoto from '../../assets/sponsors/lynden-rosier.webp';
 import neoPhoto from '../../assets/sponsors/neo-wang.webp';
 import kylePhoto from '../../assets/sponsors/kyle-simpson.webp';
+import cleanshotLogo from '../../assets/sponsors/cleanshot.svg';
 
-// People show a photo (or their initials) with a short bio and an optional website; companies show a logo.
+// People show a photo (or their initials) with a short bio and an optional website; organizations show a logo and name.
 // { kind: 'company', name: 'Acme', logo: acmeLogo, href: 'https://acme.com' }
 const sponsors = [
   {
@@ -30,6 +31,12 @@ const sponsors = [
     photoSize: 440,
     href: 'https://me.getify.com/',
     bio: 'Kyle Simpson is a web-oriented software engineer, widely acclaimed for his “You Don’t Know JS” book series and nearly 1M hours viewed of his online courses. Kyle’s superpower is asking better questions, and he deeply believes in maximally using the minimally-necessary tools for any task. As a “human-centric technologist”, he’s passionate about bringing humans and technology together, evolving engineering organizations towards solving the right problems, in simpler ways. Kyle will always fight for the people behind the pixels.'
+  },
+  {
+    kind: 'company',
+    name: 'CleanShot',
+    logo: cleanshotLogo,
+    href: 'https://cleanshot.com/'
   }
 ];
 
@@ -54,7 +61,7 @@ function PersonSponsor ({ sponsor }) {
           )
         : <span className='sponsor-photo sponsor-initials' aria-hidden='true'>{getInitials(sponsor.name)}</span>}
       <div>
-        <h3 className='sponsor-name'>{sponsor.name}</h3>
+        <h4 className='sponsor-name'>{sponsor.name}</h4>
         <p className='sponsor-role'>{sponsor.role}</p>
         <p className='sponsor-bio'>{sponsor.bio}</p>
         {sponsor.href
@@ -71,9 +78,14 @@ function PersonSponsor ({ sponsor }) {
 }
 
 function CompanySponsor ({ sponsor }) {
-  const content = sponsor.logo
-    ? <img className='sponsor-logo' src={sponsor.logo} alt={sponsor.name} loading='lazy' decoding='async' />
-    : <span className='sponsor-name'>{sponsor.name}</span>;
+  const content = (
+    <>
+      {sponsor.logo
+        ? <img className='sponsor-logo' src={sponsor.logo} alt='' loading='lazy' decoding='async' />
+        : null}
+      <span className='sponsor-name'>{sponsor.name}</span>
+    </>
+  );
 
   return (
     <li className='sponsor'>
@@ -106,16 +118,22 @@ export default function SponsorsSection () {
         </div>
         {people.length > 0
           ? (
-            <ul className='sponsor-people'>
-              {people.map((sponsor) => <PersonSponsor key={sponsor.name} sponsor={sponsor} />)}
-            </ul>
+            <div>
+              <h3 className='sponsor-group-heading'>People</h3>
+              <ul className='sponsor-people'>
+                {people.map((sponsor) => <PersonSponsor key={sponsor.name} sponsor={sponsor} />)}
+              </ul>
+            </div>
             )
           : null}
         {companies.length > 0
           ? (
-            <ul className='sponsor-grid'>
-              {companies.map((sponsor) => <CompanySponsor key={sponsor.name} sponsor={sponsor} />)}
-            </ul>
+            <div>
+              <h3 className='sponsor-group-heading'>Organizations</h3>
+              <ul className='sponsor-grid'>
+                {companies.map((sponsor) => <CompanySponsor key={sponsor.name} sponsor={sponsor} />)}
+              </ul>
+            </div>
             )
           : null}
       </div>
