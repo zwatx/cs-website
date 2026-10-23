@@ -77,21 +77,31 @@ function PersonSponsor ({ sponsor }) {
   );
 }
 
-function CompanySponsor ({ sponsor }) {
+// Organization rows avoid "sponsor" class names: ad-blocker lists such as EasyList hide generic
+// selectors like .sponsor-link, which would remove the acknowledgement entirely.
+function OrganizationSponsor ({ sponsor }) {
   const content = (
     <>
       {sponsor.logo
-        ? <img className='sponsor-logo' src={sponsor.logo} alt='' loading='lazy' decoding='async' />
+        ? <img className='organization-logo' src={sponsor.logo} alt='' width='40' height='40' loading='lazy' decoding='async' />
         : null}
-      <span className='sponsor-name'>{sponsor.name}</span>
+      <span className='organization-name'>{sponsor.name}</span>
+      {sponsor.href
+        ? (
+          <span className='organization-domain'>
+            {new URL(sponsor.href).hostname}
+            <span className='action-arrow' aria-hidden='true'>↗</span>
+          </span>
+          )
+        : null}
     </>
   );
 
   return (
-    <li className='sponsor'>
+    <li className='organization'>
       {sponsor.href
-        ? <a className='sponsor-link' href={sponsor.href} target='_blank' rel='noreferrer'>{content}</a>
-        : content}
+        ? <a className='organization-row' href={sponsor.href} target='_blank' rel='noreferrer'>{content}</a>
+        : <div className='organization-row'>{content}</div>}
     </li>
   );
 }
@@ -130,8 +140,8 @@ export default function SponsorsSection () {
           ? (
             <div>
               <h3 className='sponsor-group-heading'>Organizations</h3>
-              <ul className='sponsor-grid'>
-                {companies.map((sponsor) => <CompanySponsor key={sponsor.name} sponsor={sponsor} />)}
+              <ul className='organization-list'>
+                {companies.map((sponsor) => <OrganizationSponsor key={sponsor.name} sponsor={sponsor} />)}
               </ul>
             </div>
             )

@@ -645,53 +645,60 @@
   letter-spacing: -0.02em;
 }
 
-/* Organizations share one bordered grid; logo and name sit in equal cells. */
-.sponsor-grid {
+/* Organizations: full-width ruled rows with logo, name, and domain. Class names avoid
+   "sponsor" so generic ad-blocker selectors (e.g. EasyList's .sponsor-link) don't hide them. */
+.organization-list {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-block-end: 1px solid var(--line);
+}
+
+.organization {
+  border-block-start: 1px solid var(--line);
+}
+
+.organization-row {
+  min-height: 72px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  padding: 1px 0 0 1px;
-}
-
-/* Each cell draws its own border and overlaps its neighbours by 1px, so the
-   outline wraps any number of sponsors without trailing empty tracks. */
-.sponsor {
-  min-height: 132px;
-  display: grid;
-  margin: -1px 0 0 -1px;
-  border: 1px solid var(--line);
-}
-
-.sponsor,
-.sponsor-link {
-  padding: 24px;
-  place-content: center;
-  justify-items: center;
-  gap: 12px;
-  text-align: center;
-}
-
-.sponsor:has(.sponsor-link) {
-  padding: 0;
-}
-
-.sponsor-link {
-  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(14px, 2vw, 20px);
+  padding-block: 16px;
   color: inherit;
   text-decoration: none;
-  transition: background-color 150ms ease;
 }
 
-.sponsor-logo {
-  width: auto;
-  max-width: 100%;
-  height: 56px;
+.organization-logo {
+  width: 40px;
+  height: 40px;
   display: block;
   object-fit: contain;
 }
 
+.organization-name {
+  font-size: 17px;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+.organization-domain {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 520;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.organization-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* People: square photo beside name, role, and a short bio. */
 .sponsor-name {
   margin: 0;
   font-size: 17px;
@@ -699,7 +706,6 @@
   letter-spacing: -0.02em;
 }
 
-/* People: square photo beside name, role, and a short bio. */
 .sponsor-people {
   margin: 0;
   padding: 0;
@@ -872,8 +878,12 @@
     transform: scale(1.018);
   }
 
-  .sponsor-link:hover {
-    background: var(--surface);
+  .organization-row:hover .organization-domain {
+    color: var(--ink);
+  }
+
+  .organization-row:hover .action-arrow {
+    transform: translateX(3px);
   }
 }
 
