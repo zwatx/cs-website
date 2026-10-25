@@ -2,6 +2,11 @@ import rosierPhoto from '../../assets/sponsors/lynden-rosier.webp';
 import neoPhoto from '../../assets/sponsors/neo-wang.webp';
 import kylePhoto from '../../assets/sponsors/kyle-simpson.webp';
 import cleanshotLogo from '../../assets/sponsors/cleanshot.svg';
+import sublimeTextLogo from '../../assets/sponsors/sublime-text.png';
+import scrimbaLogo from '../../assets/sponsors/scrimba.png';
+import codecombatLogo from '../../assets/sponsors/codecombat.png';
+import realPythonLogo from '../../assets/sponsors/real-python.png';
+import interviewCakeLogo from '../../assets/sponsors/interview-cake.png';
 
 // People show a photo (or their initials) with a short bio and an optional website; organizations show a logo and name.
 // { kind: 'company', name: 'Acme', logo: acmeLogo, href: 'https://acme.com' }
@@ -37,6 +42,36 @@ const sponsors = [
     name: 'CleanShot',
     logo: cleanshotLogo,
     href: 'https://cleanshot.com/'
+  },
+  {
+    kind: 'company',
+    name: 'Sublime Text',
+    logo: sublimeTextLogo,
+    href: 'https://www.sublimetext.com/'
+  },
+  {
+    kind: 'company',
+    name: 'Scrimba',
+    logo: scrimbaLogo,
+    href: 'https://scrimba.com/'
+  },
+  {
+    kind: 'company',
+    name: 'CodeCombat',
+    logo: codecombatLogo,
+    href: 'https://codecombat.com/'
+  },
+  {
+    kind: 'company',
+    name: 'Real Python',
+    logo: realPythonLogo,
+    href: 'https://realpython.com/'
+  },
+  {
+    kind: 'company',
+    name: 'Interview Cake',
+    logo: interviewCakeLogo,
+    href: 'https://www.interviewcake.com/'
   }
 ];
 
