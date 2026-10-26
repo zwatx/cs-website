@@ -5,6 +5,9 @@ export default function Footer () {
         <span>Westlake High School CS Club</span>
         <span>Room 291A · Mondays, 4:30–5:30</span>
       </div>
+      <div className='footer-inner'>
+        <span>Lovingly designed by <a href='locl.pages.dev'>::1</a></span>
+      </div>
     </footer>
   );
 }
