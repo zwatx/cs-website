@@ -105,7 +105,9 @@ export const events = [
     speaker: 'Kyle Simpson',
     credential: 'Author of the “You Don’t Know JS” book series',
     description:
-      'Kyle Simpson shares his thoughts, and shows some code, from SI: Super(ficial) Intelligence, a recent art and satire project he built.'
+      'Kyle Simpson shares his thoughts, and shows some code, from SI: Super(ficial) Intelligence, a recent art and satire project he built.',
+    signupNote: 'Use this link to signup!',
+    link: 'https://forms.gle/C85smVa1bZopojco9'
   },
   {
     type: 'Competitive Programming',
